@@ -18,6 +18,7 @@
 
   <link href="css/normalize.css" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
+  <link href="css/site.css" rel="stylesheet">
 
   <meta content="#fafafa" name="theme-color">
 </head>
@@ -25,7 +26,31 @@
 <body>
 
 <!-- Add your site or application content here -->
-<p>Hello world! This is HTML5 Boilerplate.</p>
+<header>
+  <h1>Trade Prediction Point Calculator</h1>
+</header>
+<main>
+  <form enctype="multipart/form-data">
+    <div>
+      <label>Actual Trades file
+        <input accept="text/csv" id="actual-trades-file" name="actual-trades-file"
+               placeholder="choose actual trades file..."
+               type="file"/>
+      </label>
+    </div>
+    <div>
+      <label>Predictions file
+        <input accept="text/csv" id="predictions-file" name="predictions-file" placeholder="choose predictions file..."
+               type="file"/>
+      </label>
+    </div>
+    <div>
+      <button type="button">Calculate Points</button>
+    </div>
+    <output name="calculator-result"></output>
+  </form>
+</main>
+
 <script src="js/vendor/modernizr-3.11.2.min.js"></script>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
