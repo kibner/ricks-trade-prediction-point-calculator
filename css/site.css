@@ -1,3 +1,11 @@
 label > input {
   display: block;
 }
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-right {
+  text-align: right;
+}

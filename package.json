@@ -13,5 +13,8 @@
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "csv-parse": "^5.3.3"
   }
 }
