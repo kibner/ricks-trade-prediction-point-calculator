@@ -2,8 +2,13 @@ label > input {
   display: block;
 }
 
-.text-align-left {
-  text-align: left;
+th,
+td {
+  text-align: left
+}
+
+.text-align-center {
+  text-align: center;
 }
 
 .text-align-right {
