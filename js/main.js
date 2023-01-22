@@ -30,6 +30,7 @@ id,user,player
     const PARSED_COMPLETED_TRADES = get_parsed_csv(TEST_COMPLETED_TRADES_CSV)
     const PARSED_PREDICTED_TRADES = get_parsed_csv(TEST_PREDICTED_TRADES_CSV)
     const RESULTS = get_calculated_results(PARSED_COMPLETED_TRADES, PARSED_PREDICTED_TRADES)
+    display_results(RESULTS)
   }
 
   function get_parsed_csv(csv_string) {
@@ -43,6 +44,7 @@ id,user,player
     return [
       {
         user: `Derek Fisher Fan`,
+        total_points: 16,
         bonus_points: 6,
         prediction_results: [
           {
@@ -64,6 +66,7 @@ id,user,player
       },
       {
         user: `Austin Rivers Enjoyer`,
+        total_points: 6,
         bonus_points: 0,
         prediction_results: [
           {
@@ -84,5 +87,34 @@ id,user,player
           }
         ]
       }]
+  }
+
+  function display_results(results) {
+    const TBODY = document.querySelector(`output[name='calculator-result'] tbody`)
+    const ROW_TEMPLATE = document.querySelector(`#calculated-points-row`)
+
+    results.forEach(function (calculated_result, index, array) {
+      const TEMPLATED_ROW = get_templated_row(ROW_TEMPLATE, calculated_result)
+      TBODY.appendChild(TEMPLATED_ROW)
+    })
+  }
+
+  function get_templated_row(row_template, calculated_result){
+    const TEMPLATED_ROW = row_template.content.cloneNode(true)
+    let tds = TEMPLATED_ROW.querySelectorAll(`td`)
+
+    set_templated_row_td_values(tds, calculated_result)
+
+    return TEMPLATED_ROW
+  }
+
+  function set_templated_row_td_values(tds, calculated_result){
+    tds[0].textContent = calculated_result.user
+    tds[1].textContent = calculated_result.total_points
+
+    calculated_result.prediction_results.forEach(function (prediction_result, index, array) {
+      const TD_INDEX = index + 2
+      tds[TD_INDEX].textContent = prediction_result.player
+    })
   }
 })()
