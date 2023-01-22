@@ -1,5 +1,5 @@
-import {CALCULATED_RESULTS} from "../test-data"
+import {TEST_DATA__CALCULATED_RESULTS} from "../test-data"
 
 export const GET_CALCULATED_RESULTS = function (completed_trades, predicted_trades) {
-  return CALCULATED_RESULTS
+  return TEST_DATA__CALCULATED_RESULTS
 }

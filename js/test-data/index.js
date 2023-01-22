@@ -1,10 +1,10 @@
-export const COMPLETED_TRADES__CSV = `
+export const TEST_DATA__COMPLETED_TRADES__CSV = `
 id,player
 1,nick van exel
 2,jose alvarado
 `
 
-export const PREDICTED_TRADES__CSV = `
+export const TEST_DATA__PREDICTED_TRADES__CSV = `
 id,user,player
 1,derek fisher fan,nick van exel
 2,derek fisher fan,robert horry
@@ -16,7 +16,7 @@ id,user,player
 8,austin rivers enjoyer,jarrett jack
 `
 
-export const CALCULATED_RESULTS = [
+export const TEST_DATA__CALCULATED_RESULTS = [
   {
     user: `Derek Fisher Fan`,
     total_points: 16,
