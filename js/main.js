@@ -43,6 +43,7 @@ id,user,player
     return [
       {
         user: `Derek Fisher Fan`,
+        bonus_points: 6,
         prediction_results: [
           {
             player: `Nick Van Exel`,
@@ -63,6 +64,7 @@ id,user,player
       },
       {
         user: `Austin Rivers Enjoyer`,
+        bonus_points: 0,
         prediction_results: [
           {
             player: `Jose Alvarado`,
