@@ -1,0 +1,51 @@
+html {
+  color: #fff;
+  background: #222;
+}
+
+::-moz-selection {
+  background: #6e4d25;
+}
+
+::selection {
+  background: #6e4d25;
+}
+
+hr {
+  border-top-color: #555;
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    color: #222;
+    background: #fff;
+  }
+
+  ::-moz-selection {
+    background: #b3d4fc;
+  }
+
+  ::selection {
+    background: #b3d4fc;
+  }
+
+  hr {
+    border-top-color: #ccc;
+  }
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
+  /* Style adjustments for high resolution devices */
+}

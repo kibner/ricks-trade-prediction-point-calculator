@@ -1,0 +1,23 @@
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.margin-top-1em {
+  margin-top: 1em;
+}
+
+.hover-outline {
+  display: inline-block;
+}
+
+.hover-outline:focus,
+.hover-outline:focus-visible,
+.hover-outline:focus-within,
+.hover-outline:hover {
+  outline: 2px solid;
+  outline-offset: 2px;
+}

@@ -1,0 +1,56 @@
+/* inspiration from https://alvaromontoro.com/blog/67925/making-tables-more-accessible-with-css */
+table, thead, tbody, tfoot, tr, td, th {
+  border-collapse: collapse;
+}
+
+thead {
+  box-shadow: inset 0 -2px;
+}
+
+tfoot {
+  box-shadow: inset 0 2px;
+}
+
+th, td {
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+
+tbody > tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.175);
+}
+
+tbody > tr:nth-child(odd) {
+  box-shadow: 0 -1px rgba(0, 0, 0, 0.11), 0 1px rgba(0, 0, 0, 0.11);
+}
+
+tbody > tr:hover {
+  background-color: #6e4d25;
+}
+
+
+@media (prefers-color-scheme: light) {
+  tbody > tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  tbody > tr:hover {
+    background-color: #b3d4fc;
+  }
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
+  /* Style adjustments for high resolution devices */
+}

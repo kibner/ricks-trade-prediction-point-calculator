@@ -1,0 +1,16 @@
+@import './normalize.css';
+@import './main.css';
+
+/* always import color-scheme.css before other custom css */
+@import './custom/color-scheme.css';
+
+@import './custom/body.css';
+@import './custom/button.css';
+@import './custom/form.css';
+@import './custom/input.css';
+@import './custom/label.css';
+@import './custom/output.css';
+@import './custom/table.css';
+
+/* always import helpers.css last*/
+@import './custom/helpers.css';

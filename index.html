@@ -16,41 +16,42 @@
   <link href="icon.png" rel="apple-touch-icon">
   <!-- Place favicon.ico in the root directory -->
 
-  <link href="css/normalize.css" rel="stylesheet">
-  <link href="css/main.css" rel="stylesheet">
-  <link href="css/site.css" rel="stylesheet">
+  <link href="css/_bundle.css" rel="stylesheet">
 
-  <meta content="#fafafa" name="theme-color">
+  <meta name="theme-color" content="#fafafa">
+  <meta name="color-scheme" content="dark light">
 </head>
 
 <body>
-
-<!-- Add your site or application content here -->
 <header>
   <h1>Trade Prediction Point Calculator</h1>
 </header>
 <main>
   <form enctype="multipart/form-data">
-    <div>
-      <label>Completed Trades file
+    <div class="margin-top-1em">
+      <div class="hover-outline">
+        <label for="predicted-trades-file">Completed Trades file</label>
         <input accept="text/csv"
                id="completed-trades-file"
                name="completed-trades-file"
                placeholder="choose completed trades file..."
                type="file"/>
-      </label>
+      </div>
     </div>
-    <div>
-      <label>Predicted Trades file
+    <div class="margin-top-1em">
+      <div class="hover-outline">
+        <label for="predicted-trades-file">Predicted Trades file</label>
         <input accept="text/csv"
                id="predicted-trades-file"
                name="predicted-trades-file"
                placeholder="choose predicted trades file..."
                type="file"/>
-      </label>
+      </div>
     </div>
-    <div>
-      <button type="button">Calculate Points</button>
+    <div class="margin-top-1em">
+      <div class="hover-outline">
+        <button type="button">Calculate Points</button>
+      </div>
     </div>
     <output name="calculator-result">
       <table>

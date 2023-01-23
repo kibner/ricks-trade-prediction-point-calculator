@@ -61,5 +61,51 @@ export const TEST_DATA__CALCULATED_RESULTS = [
         points: 1
       }
     ]
+  },
+  {
+    user: `Superfan, King of Casuals`,
+    total_points: 2,
+    bonus_points: 0,
+    prediction_results: [
+      {
+        player: `LeBron James`,
+        points: 0
+      },
+      {
+        player: `Steph Curry`,
+        points: 0
+      },
+      {
+        player: `Brandon Ingram`,
+        points: 0
+      },
+      {
+        player: `Jason Tatum`,
+        points: 2
+      }
+    ]
+  },
+  {
+    user: `Student of the Game`,
+    total_points: 0,
+    bonus_points: 0,
+    prediction_results: [
+      {
+        player: `Alperen Sengun`,
+        points: 0
+      },
+      {
+        player: `Zion Williamson`,
+        points: 0
+      },
+      {
+        player: `Luka Doncic`,
+        points: 0
+      },
+      {
+        player: `Bam Adebayo`,
+        points: 0
+      }
+    ]
   }
 ]
