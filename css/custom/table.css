@@ -17,7 +17,7 @@ th, td {
 }
 
 tbody > tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.175);
+  background-color: rgba(0, 0, 0, 0.45);
 }
 
 tbody > tr:nth-child(odd) {
