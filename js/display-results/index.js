@@ -10,7 +10,7 @@ export const DISPLAY_RESULTS = function (results) {
 
 const GET_TEMPLATED_ROW = function (row_template, calculated_result) {
   const TEMPLATED_ROW = row_template.content.cloneNode(true)
-  let tds = TEMPLATED_ROW.querySelectorAll(`td`)
+  const tds = TEMPLATED_ROW.querySelectorAll(`td`)
 
   SET_TEMPLATED_ROW_TD_VALUES(tds, calculated_result)
 
