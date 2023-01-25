@@ -1,7 +1,8 @@
-body {
-  margin-left: auto;
-  margin-right: auto;
+body
+{
   max-width: 50em; /* 50-75 is optimal range */
+  margin-right: auto;
+  margin-left: auto;
 }
 
 /* ==========================================================================
@@ -9,13 +10,15 @@ body {
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
    ========================================================================== */
-@media only screen and (min-width: 35em) {
+@media only screen and (min-width: 35em)
+{
   /* Style adjustments for viewports that meet the condition */
 }
 
 @media print,
 (-webkit-min-device-pixel-ratio: 1.25),
 (min-resolution: 1.25dppx),
-(min-resolution: 120dpi) {
+(min-resolution: 120dpi)
+{
   /* Style adjustments for high resolution devices */
 }

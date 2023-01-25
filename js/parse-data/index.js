@@ -1,8 +1,9 @@
-import {parse} from "csv-parse/lib/sync";
+import {parse} from 'csv-parse/lib/sync';
 
-export const GET_PARSED_CSV = function (csv_string) {
+export const GET_PARSED_CSV = function (csv_string)
+{
   return parse(csv_string, {
     columns: true,
-    skip_empty_lines: true
-  })
-}
+    skip_empty_lines: true,
+  });
+};

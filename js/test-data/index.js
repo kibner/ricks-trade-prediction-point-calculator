@@ -2,7 +2,7 @@ export const TEST_DATA__COMPLETED_TRADES__CSV = `
 id,player
 1,nick van exel
 2,jose alvarado
-`
+`;
 
 export const TEST_DATA__PREDICTED_TRADES__CSV = `
 id,user,player
@@ -14,7 +14,7 @@ id,user,player
 6,austin rivers enjoyer,robin lopez
 7,austin rivers enjoyer,jrue holiday
 8,austin rivers enjoyer,jarrett jack
-`
+`;
 
 export const TEST_DATA__CALCULATED_RESULTS = [
   {
@@ -24,20 +24,20 @@ export const TEST_DATA__CALCULATED_RESULTS = [
     prediction_results: [
       {
         player: `Nick Van Exel`,
-        points: 5
+        points: 5,
       },
       {
         player: `Robert Horry`,
-        points: 2
+        points: 2,
       },
       {
         player: `Jordan Hill`,
-        points: 2
+        points: 2,
       }, {
         player: `Chris Mihm`,
-        points: 1
-      }
-    ]
+        points: 1,
+      },
+    ],
   },
   {
     user: `Austin Rivers Enjoyer`,
@@ -46,21 +46,21 @@ export const TEST_DATA__CALCULATED_RESULTS = [
     prediction_results: [
       {
         player: `Jose Alvarado`,
-        points: 2
+        points: 2,
       },
       {
         player: `Robin Lopez`,
-        points: 1
+        points: 1,
       },
       {
         player: `Jrue Holiday`,
-        points: 2
+        points: 2,
       },
       {
         player: `Jarret Jack`,
-        points: 1
-      }
-    ]
+        points: 1,
+      },
+    ],
   },
   {
     user: `Superfan, King of Casuals`,
@@ -69,21 +69,21 @@ export const TEST_DATA__CALCULATED_RESULTS = [
     prediction_results: [
       {
         player: `LeBron James`,
-        points: 0
+        points: 0,
       },
       {
         player: `Steph Curry`,
-        points: 0
+        points: 0,
       },
       {
         player: `Brandon Ingram`,
-        points: 0
+        points: 0,
       },
       {
         player: `Jason Tatum`,
-        points: 2
-      }
-    ]
+        points: 2,
+      },
+    ],
   },
   {
     user: `Student of the Game`,
@@ -92,20 +92,20 @@ export const TEST_DATA__CALCULATED_RESULTS = [
     prediction_results: [
       {
         player: `Alperen Sengun`,
-        points: 0
+        points: 0,
       },
       {
         player: `Zion Williamson`,
-        points: 0
+        points: 0,
       },
       {
         player: `Luka Doncic`,
-        points: 0
+        points: 0,
       },
       {
         player: `Bam Adebayo`,
-        points: 0
-      }
-    ]
-  }
-]
+        points: 0,
+      },
+    ],
+  },
+];

@@ -11,10 +11,11 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
-html {
-  color: #222;
+html
+{
   font-size: 1em;
   line-height: 1.4;
+  color: #222;
 }
 
 /*
@@ -27,12 +28,14 @@ html {
  * Customize the background color to match your design.
  */
 
-::-moz-selection {
+::-moz-selection
+{
   background: #b3d4fc;
   text-shadow: none;
 }
 
-::selection {
+::selection
+{
   background: #b3d4fc;
   text-shadow: none;
 }
@@ -41,13 +44,14 @@ html {
  * A better looking default horizontal rule
  */
 
-hr {
+hr
+{
   display: block;
   height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
   margin: 1em 0;
   padding: 0;
+  border: 0;
+  border-top: 1px solid #ccc;
 }
 
 /*
@@ -61,7 +65,8 @@ canvas,
 iframe,
 img,
 svg,
-video {
+video
+{
   vertical-align: middle;
 }
 
@@ -69,17 +74,19 @@ video {
  * Remove default fieldset styles.
  */
 
-fieldset {
-  border: 0;
+fieldset
+{
   margin: 0;
   padding: 0;
+  border: 0;
 }
 
 /*
  * Allow only vertical resizing of textareas.
  */
 
-textarea {
+textarea
+{
   resize: vertical;
 }
 
@@ -96,7 +103,8 @@ textarea {
  */
 
 .hidden,
-[hidden] {
+[hidden]
+{
   display: none !important;
 }
 
@@ -109,16 +117,17 @@ textarea {
  *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
  */
 
-.sr-only {
-  border: 0;
+.sr-only
+{
+  position: absolute;
+  overflow: hidden;
   clip: rect(0, 0, 0, 0);
+  width: 1px;
   height: 1px;
   margin: -1px;
-  overflow: hidden;
   padding: 0;
-  position: absolute;
   white-space: nowrap;
-  width: 1px;
+  border: 0;
   /* 1 */
 }
 
@@ -129,21 +138,23 @@ textarea {
  */
 
 .sr-only.focusable:active,
-.sr-only.focusable:focus {
+.sr-only.focusable:focus
+{
+  position: static;
+  overflow: visible;
   clip: auto;
+  width: auto;
   height: auto;
   margin: 0;
-  overflow: visible;
-  position: static;
   white-space: inherit;
-  width: auto;
 }
 
 /*
  * Hide visually and from screen readers, but maintain layout
  */
 
-.invisible {
+.invisible
+{
   visibility: hidden;
 }
 
@@ -160,12 +171,14 @@ textarea {
  */
 
 .clearfix::before,
-.clearfix::after {
-  content: " ";
+.clearfix::after
+{
   display: table;
+  content: ' ';
 }
 
-.clearfix::after {
+.clearfix::after
+{
   clear: both;
 }
 
@@ -175,14 +188,16 @@ textarea {
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 35em) {
+@media only screen and (min-width: 35em)
+{
   /* Style adjustments for viewports that meet the condition */
 }
 
 @media print,
 (-webkit-min-device-pixel-ratio: 1.25),
 (min-resolution: 1.25dppx),
-(min-resolution: 120dpi) {
+(min-resolution: 120dpi)
+{
   /* Style adjustments for high resolution devices */
 }
 
@@ -192,45 +207,53 @@ textarea {
    https://www.phpied.com/delay-loading-your-print-css/
    ========================================================================== */
 
-@media print {
+@media print
+{
   *,
   *::before,
-  *::after {
-    background: #fff !important;
+  *::after
+  {
     color: #000 !important;
+    background: #fff !important;
     /* Black prints faster */
     box-shadow: none !important;
     text-shadow: none !important;
   }
 
   a,
-  a:visited {
+  a:visited
+  {
     text-decoration: underline;
   }
 
-  a[href]::after {
-    content: " (" attr(href) ")";
+  a[href]::after
+  {
+    content: ' (' attr(href) ')';
   }
 
-  abbr[title]::after {
-    content: " (" attr(title) ")";
+  abbr[title]::after
+  {
+    content: ' (' attr(title) ')';
   }
 
   /*
    * Don't show links that are fragment identifiers,
    * or use the `javascript:` pseudo protocol
    */
-  a[href^="#"]::after,
-  a[href^="javascript:"]::after {
-    content: "";
+  a[href^='#']::after,
+  a[href^='javascript:']::after
+  {
+    content: '';
   }
 
-  pre {
+  pre
+  {
     white-space: pre-wrap !important;
   }
 
   pre,
-  blockquote {
+  blockquote
+  {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
@@ -239,24 +262,28 @@ textarea {
    * Printing Tables:
    * https://web.archive.org/web/20180815150934/http://css-discuss.incutio.com/wiki/Printing_Tables
    */
-  thead {
+  thead
+  {
     display: table-header-group;
   }
 
   tr,
-  img {
+  img
+  {
     page-break-inside: avoid;
   }
 
   p,
   h2,
-  h3 {
+  h3
+  {
     orphans: 3;
     widows: 3;
   }
 
   h2,
-  h3 {
+  h3
+  {
     page-break-after: avoid;
   }
 }
