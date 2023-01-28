@@ -54,16 +54,13 @@ function GET_GROUPED_PREDICTED_TRADES(predicted_trades)
   );
 }
 
-export const GET_CALCULATED_RESULTS = function (completed_trades, predicted_trades)
+function BUILD_RESULTS_OBJECT(grouped_predicted_trades)
 {
-  completed_trades = SET_PICK_FREQUENCY_FOR_COMPLETED_TRADES(completed_trades, predicted_trades);
-  const GROUPED_PREDICTED_TRADES = GET_GROUPED_PREDICTED_TRADES(predicted_trades);
-
-  const RESULTS = Object.entries(GROUPED_PREDICTED_TRADES).map(
+  return Object.entries(grouped_predicted_trades).map(
     function ([user, predicted_trades])
     {
       return {
-        user,
+        user: user,
         total_points: 0,
         bonus_points: 0,
         prediction_results: predicted_trades.map(
@@ -78,6 +75,13 @@ export const GET_CALCULATED_RESULTS = function (completed_trades, predicted_trad
       };
     },
   );
+}
+
+export const GET_CALCULATED_RESULTS = function (completed_trades, predicted_trades)
+{
+  completed_trades = SET_PICK_FREQUENCY_FOR_COMPLETED_TRADES(completed_trades, predicted_trades);
+  const GROUPED_PREDICTED_TRADES = GET_GROUPED_PREDICTED_TRADES(predicted_trades);
+  const RESULTS = BUILD_RESULTS_OBJECT(GROUPED_PREDICTED_TRADES);
 
   console.log(RESULTS);
 
