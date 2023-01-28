@@ -14,6 +14,10 @@ id,user,player
 6,austin rivers enjoyer,robin lopez
 7,austin rivers enjoyer,jrue holiday
 8,austin rivers enjoyer,jarrett jack
+5,duplicate,jose alvarado
+6,duplicate,robin lopez
+7,duplicate,jrue holiday
+8,duplicate,jarrett jack
 `;
 
 export const TEST_DATA__CALCULATED_RESULTS = [
