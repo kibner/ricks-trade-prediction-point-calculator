@@ -59,7 +59,27 @@ export const GET_CALCULATED_RESULTS = function (completed_trades, predicted_trad
   completed_trades = SET_PICK_FREQUENCY_FOR_COMPLETED_TRADES(completed_trades, predicted_trades);
   const GROUPED_PREDICTED_TRADES = GET_GROUPED_PREDICTED_TRADES(predicted_trades);
 
-  console.log(GROUPED_PREDICTED_TRADES);
+  const RESULTS = Object.entries(GROUPED_PREDICTED_TRADES).map(
+    function ([user, predicted_trades])
+    {
+      return {
+        user,
+        total_points: 0,
+        bonus_points: 0,
+        prediction_results: predicted_trades.map(
+          function (predicted_trade)
+          {
+            return {
+              player: predicted_trade,
+              points: 0,
+            };
+          },
+        ),
+      };
+    },
+  );
+
+  console.log(RESULTS);
 
   return TEST_DATA__CALCULATED_RESULTS;
 };
