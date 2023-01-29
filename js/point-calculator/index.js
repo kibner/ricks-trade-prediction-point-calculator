@@ -39,7 +39,7 @@ const SET_PICK_FREQUENCY_FOR_COMPLETED_TRADES = function (completed_trades, pred
   return completed_trades;
 };
 
-function GET_GROUPED_PREDICTED_TRADES(predicted_trades)
+const GET_GROUPED_PREDICTED_TRADES = function (predicted_trades)
 {
   const INITIAL_GROUP_PREDICTED_TRADE_VALUE = {};
 
@@ -52,42 +52,60 @@ function GET_GROUPED_PREDICTED_TRADES(predicted_trades)
       return {...accumulator, [KEY]: [...CURRENT_GROUP, current_predicted_trade.player]};
     }, INITIAL_GROUP_PREDICTED_TRADE_VALUE,
   );
-}
-
-function BUILD_RESULTS_OBJECT(grouped_predicted_trades)
-{
-  return Object.entries(grouped_predicted_trades).map(
-    function ([user, predicted_trades])
-    {
-      return {
-        user: user,
-        total_points: 0,
-        bonus_points: 0,
-        prediction_results: predicted_trades.map(
-          function (predicted_trade)
-          {
-            return {
-              player: predicted_trade,
-              points: 0,
-            };
-          },
-        ),
-      };
-    },
-  );
-}
-
-const TRANSFORM_PREDICTED_TRADES_INTO_RESULTS_OBJECT = function (predicted_trades)
-{
-  const GROUPED_PREDICTED_TRADES = GET_GROUPED_PREDICTED_TRADES(predicted_trades);
-
-  return BUILD_RESULTS_OBJECT(GROUPED_PREDICTED_TRADES);
 };
 
-export const GET_CALCULATED_RESULTS = function (completed_trades, predicted_trades)
+const GET_CALCULATED_POINTS_FOR_PREDICTION = function (predicted_trade, completed_trades)
+{
+  return 0;
+};
+
+const GET_CALCULATED_BONUS_POINTS = function (user_results)
+{
+  return 0;
+};
+
+const GET_TOTAL_POINTS_FOR_USER = function (user_results)
+{
+  return user_results.prediction_results.reduce(
+    function (accumulator, current_prediction)
+    {
+      return accumulator + current_prediction.points;
+    }, user_results.bonus_points,
+  );
+};
+
+const GET_CALCULATED_POINTS_FOR_USER = function (user, predicted_trades, completed_trades)
+{
+  let results = {
+    user: user,
+    prediction_results: predicted_trades.map(
+      function (predicted_trade)
+      {
+        return {
+          player: predicted_trade,
+          points: GET_CALCULATED_POINTS_FOR_PREDICTION(predicted_trade, completed_trades),
+        };
+      },
+    ),
+  };
+
+  results.bonus_points = GET_CALCULATED_BONUS_POINTS(results);
+  results.total_points = GET_TOTAL_POINTS_FOR_USER(results);
+
+  return results;
+};
+
+export const GET_CALCULATED_POINTS = function (completed_trades, predicted_trades)
 {
   completed_trades = SET_PICK_FREQUENCY_FOR_COMPLETED_TRADES(completed_trades, predicted_trades);
-  const RESULTS = TRANSFORM_PREDICTED_TRADES_INTO_RESULTS_OBJECT(predicted_trades);
+  const GROUPED_PREDICTED_TRADES = GET_GROUPED_PREDICTED_TRADES(predicted_trades);
+
+  const RESULTS = Object.entries(GROUPED_PREDICTED_TRADES).map(
+    function ([user, predicted_trades])
+    {
+      return GET_CALCULATED_POINTS_FOR_USER(user, predicted_trades, completed_trades);
+    },
+  );
 
   console.log(RESULTS);
 
