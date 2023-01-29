@@ -1,43 +1,7 @@
-// +01: For a correctly named player.
-// +03 Bonus point if between (and including, to clarify) 5 and 1 other people mentioned this player
-// +06: If you nail at least three players.
-// +09: Bonus points if no one else mentioned this player.
-
 import {TEST_DATA__CALCULATED_RESULTS} from '../test-data';
+import PROCESS_COMPLETED_TRADES from './process-completed-trades';
+import {GET_POINTS_FOR_CORRECTLY_GUESSING_A_PLAYER, GET_POINTS_FOR_CORRECTLY_GUESSING_THREE_PLAYERS} from './rules';
 
-const HAS_MATCHING_PLAYER = function (predicted_trade, completed_trade)
-{
-  return predicted_trade.player === completed_trade.player;
-};
-
-const GET_PICK_FREQUENCY = function (predicted_trades, completed_trade)
-{
-  const INITIAL_PICK_FREQUENCY_VALUE = 0;
-
-  return predicted_trades.reduce(
-    function (accumulator, current_predicted_trade)
-    {
-      if (HAS_MATCHING_PLAYER(current_predicted_trade, completed_trade))
-      {
-        accumulator = accumulator + 1;
-      }
-
-      return accumulator;
-    },
-    INITIAL_PICK_FREQUENCY_VALUE,
-  );
-};
-
-const SET_PICK_FREQUENCY_FOR_COMPLETED_TRADES = function (completed_trades, predicted_trades)
-{
-  completed_trades.map(
-    function (completed_trade)
-    {
-      return completed_trade.pick_frequency = GET_PICK_FREQUENCY(predicted_trades, completed_trade);
-    });
-
-  return completed_trades;
-};
 
 const GET_GROUPED_PREDICTED_TRADES = function (predicted_trades)
 {
@@ -56,12 +20,12 @@ const GET_GROUPED_PREDICTED_TRADES = function (predicted_trades)
 
 const GET_CALCULATED_POINTS_FOR_PREDICTION = function (predicted_trade, completed_trades)
 {
-  return 0;
+  return GET_POINTS_FOR_CORRECTLY_GUESSING_A_PLAYER(predicted_trade, completed_trades);
 };
 
 const GET_CALCULATED_BONUS_POINTS = function (user_results)
 {
-  return 0;
+  return GET_POINTS_FOR_CORRECTLY_GUESSING_THREE_PLAYERS(user_results);
 };
 
 const GET_TOTAL_POINTS_FOR_USER = function (user_results)
@@ -97,7 +61,7 @@ const GET_CALCULATED_POINTS_FOR_USER = function (user, predicted_trades, complet
 
 export const GET_CALCULATED_POINTS = function (completed_trades, predicted_trades)
 {
-  completed_trades = SET_PICK_FREQUENCY_FOR_COMPLETED_TRADES(completed_trades, predicted_trades);
+  completed_trades = PROCESS_COMPLETED_TRADES(completed_trades, predicted_trades);
   const GROUPED_PREDICTED_TRADES = GET_GROUPED_PREDICTED_TRADES(predicted_trades);
 
   const RESULTS = Object.entries(GROUPED_PREDICTED_TRADES).map(
@@ -111,5 +75,3 @@ export const GET_CALCULATED_POINTS = function (completed_trades, predicted_trade
 
   return TEST_DATA__CALCULATED_RESULTS;
 };
-
-
