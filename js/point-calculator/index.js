@@ -77,11 +77,17 @@ function BUILD_RESULTS_OBJECT(grouped_predicted_trades)
   );
 }
 
+const TRANSFORM_PREDICTED_TRADES_INTO_RESULTS_OBJECT = function (predicted_trades)
+{
+  const GROUPED_PREDICTED_TRADES = GET_GROUPED_PREDICTED_TRADES(predicted_trades);
+
+  return BUILD_RESULTS_OBJECT(GROUPED_PREDICTED_TRADES);
+};
+
 export const GET_CALCULATED_RESULTS = function (completed_trades, predicted_trades)
 {
   completed_trades = SET_PICK_FREQUENCY_FOR_COMPLETED_TRADES(completed_trades, predicted_trades);
-  const GROUPED_PREDICTED_TRADES = GET_GROUPED_PREDICTED_TRADES(predicted_trades);
-  const RESULTS = BUILD_RESULTS_OBJECT(GROUPED_PREDICTED_TRADES);
+  const RESULTS = TRANSFORM_PREDICTED_TRADES_INTO_RESULTS_OBJECT(predicted_trades);
 
   console.log(RESULTS);
 
