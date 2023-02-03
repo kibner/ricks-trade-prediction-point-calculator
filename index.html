@@ -36,6 +36,7 @@
                name='completed-trades-file'
                placeholder='choose completed trades file...'
                type='file'
+               required
         />
       </div>
     </div>
@@ -47,12 +48,13 @@
                name='predicted-trades-file'
                placeholder='choose predicted trades file...'
                type='file'
+               required
         />
       </div>
     </div>
     <div class='margin-top-1em'>
       <div class='hover-outline'>
-        <button type='button'>Calculate Points</button>
+        <button type='submit' disabled>Calculate Points</button>
       </div>
     </div>
     <output name='calculator-result'>

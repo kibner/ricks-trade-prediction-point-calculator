@@ -2,6 +2,7 @@ export const DISPLAY_RESULTS = function (results)
 {
   const TBODY = document.querySelector(`output[name='calculator-result'] tbody`);
   const ROW_TEMPLATE = document.querySelector(`#calculated-points-row`);
+  TBODY.textContent = null;
 
   results.forEach(
     function (calculated_result, index, array)
