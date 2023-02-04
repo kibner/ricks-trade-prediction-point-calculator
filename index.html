@@ -57,7 +57,12 @@
         <button type='submit' disabled>Calculate Points</button>
       </div>
     </div>
-    <output name='calculator-result'>
+  </form>
+  <div id='calculator-result'>
+    <div class='text-align-right'>
+      <button id='export-calculator-result' type='button'>Export</button>
+    </div>
+    <div>
       <table>
         <thead>
         <tr>
@@ -68,8 +73,8 @@
         </thead>
         <tbody></tbody>
       </table>
-    </output>
-  </form>
+    </div>
+  </div>
 </main>
 
 <template id='calculated-points-row'>

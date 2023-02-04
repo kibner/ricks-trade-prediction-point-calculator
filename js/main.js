@@ -7,8 +7,9 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
   {
     const FORM_SELECTOR = 'form';
     const SUBMIT_BUTTON_SELECTOR = 'button[type="submit"]';
-    const INPUT__COMPLETED_TRADES_SELECTOR = 'completed-trades-file';
-    const INPUT__PREDICTED_TRADES_SELECTOR = 'predicted-trades-file';
+    const INPUT__COMPLETED_TRADES_SELECTOR = '#completed-trades-file';
+    const INPUT__PREDICTED_TRADES_SELECTOR = '#predicted-trades-file';
+    const EXPORT_BUTTON_SELECTOR = '#export-calculator-result';
 
     // readystatechange as event listener to insert or modify the DOM before DOMContentLoaded
     document.addEventListener(
@@ -32,6 +33,9 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
       const FORM = document.querySelector(FORM_SELECTOR);
       FORM.addEventListener('submit', ON_SUBMIT);
       FORM.addEventListener('input', ON_INPUT);
+
+      const EXPORT_BUTTON = document.querySelector(EXPORT_BUTTON_SELECTOR);
+      EXPORT_BUTTON.addEventListener('click', ON_EXPORT_BUTTON_CLICK);
     };
 
     const ON_SUBMIT = async function (event)
@@ -48,13 +52,15 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
           const PARSED_PREDICTED_TRADES = values[1];
           const RESULTS = GET_CALCULATED_POINTS(PARSED_COMPLETED_TRADES, PARSED_PREDICTED_TRADES);
 
+          // send the results as the first argument when the EXPORT_RESULTS function is called
+          EXPORT_RESULTS.bind(null, RESULTS);
           DISPLAY_RESULTS(RESULTS);
         });
     };
 
     const GET_PARSED_DATA_FOR_FILE_INPUT = async function (file_input_selector)
     {
-      const FILE = document.getElementById(file_input_selector).files[0];
+      const FILE = document.querySelector(file_input_selector).files[0];
       const FILE_TEXT = await FILE.text();
 
       return GET_PARSED_CSV(FILE_TEXT);
@@ -89,6 +95,16 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
       }
 
       return is_valid;
+    };
+
+    const ON_EXPORT_BUTTON_CLICK = function (event)
+    {
+      EXPORT_RESULTS();
+    };
+
+    const EXPORT_RESULTS = function (results)
+    {
+      console.log(results);
     };
   }
 )();
