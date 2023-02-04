@@ -1,6 +1,6 @@
 {
   "name": "ricks-trade-prediction-point-calculator",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Tool to calculate points for a trade prediction game.",
   "keywords": [],
   "license": "",
@@ -15,6 +15,6 @@
     "parcel-bundler": "^1.12.5"
   },
   "dependencies": {
-    "csv-parse": "^5.3.3"
+    "csv-parse": "^5.3.4"
   }
 }
