@@ -1,13 +1,14 @@
 import {DISPLAY_RESULTS} from './display-results';
 import {GET_PARSED_CSV} from './parse-data';
 import {GET_CALCULATED_POINTS} from './point-calculator';
-import {TEST_DATA__COMPLETED_TRADES__CSV, TEST_DATA__PREDICTED_TRADES__CSV} from './test-data';
 
 (
   function ()
   {
-    const SUBMIT_BUTTON_SELECTOR = 'button[type="submit"]';
     const FORM_SELECTOR = 'form';
+    const SUBMIT_BUTTON_SELECTOR = 'button[type="submit"]';
+    const INPUT__COMPLETED_TRADES_SELECTOR = 'completed-trades-file';
+    const INPUT__PREDICTED_TRADES_SELECTOR = 'predicted-trades-file';
 
     // readystatechange as event listener to insert or modify the DOM before DOMContentLoaded
     document.addEventListener(
@@ -33,22 +34,53 @@ import {TEST_DATA__COMPLETED_TRADES__CSV, TEST_DATA__PREDICTED_TRADES__CSV} from
       FORM.addEventListener('input', ON_INPUT);
     };
 
-    const ON_SUBMIT = function (event)
+    const ON_SUBMIT = async function (event)
     {
       event.preventDefault();
-      const PARSED_COMPLETED_TRADES = GET_PARSED_CSV(TEST_DATA__COMPLETED_TRADES__CSV);
-      const PARSED_PREDICTED_TRADES = GET_PARSED_CSV(TEST_DATA__PREDICTED_TRADES__CSV);
-      const RESULTS = GET_CALCULATED_POINTS(PARSED_COMPLETED_TRADES, PARSED_PREDICTED_TRADES);
-      DISPLAY_RESULTS(RESULTS);
+
+      Promise.all([
+                    GET_PARSED_DATA_FOR_FILE_INPUT(INPUT__COMPLETED_TRADES_SELECTOR),
+                    GET_PARSED_DATA_FOR_FILE_INPUT(INPUT__PREDICTED_TRADES_SELECTOR),
+                  ]).then(
+        function (values)
+        {
+          const PARSED_COMPLETED_TRADES = values[0];
+          const PARSED_PREDICTED_TRADES = values[1];
+          const RESULTS = GET_CALCULATED_POINTS(PARSED_COMPLETED_TRADES, PARSED_PREDICTED_TRADES);
+
+          DISPLAY_RESULTS(RESULTS);
+        });
+    };
+
+    const GET_PARSED_DATA_FOR_FILE_INPUT = async function (file_input_selector)
+    {
+      const FILE = document.getElementById(file_input_selector).files[0];
+      const FILE_TEXT = await FILE.text();
+
+      return GET_PARSED_CSV(FILE_TEXT);
     };
 
     const ON_INPUT = function (event)
     {
+      const IS_VALID = IS_EVERY_INPUT_VALID(this.querySelectorAll('input').values());
+      const SUBMIT_BUTTON = this.querySelector(SUBMIT_BUTTON_SELECTOR);
+
+      if (IS_VALID && SUBMIT_BUTTON.hasAttribute('disabled'))
+      {
+        SUBMIT_BUTTON.removeAttribute('disabled');
+      } else
+      {
+        SUBMIT_BUTTON.setAttribute('disabled', '');
+      }
+    };
+
+    const IS_EVERY_INPUT_VALID = function (input_values)
+    {
       let is_valid = true;
 
-      for (const input of this.querySelectorAll('input').values())
+      for (const INPUT of input_values)
       {
-        is_valid = input.checkValidity();
+        is_valid = INPUT.checkValidity();
 
         if (is_valid === false)
         {
@@ -56,15 +88,7 @@ import {TEST_DATA__COMPLETED_TRADES__CSV, TEST_DATA__PREDICTED_TRADES__CSV} from
         }
       }
 
-      const SUBMIT_BUTTON = this.querySelector(SUBMIT_BUTTON_SELECTOR);
-
-      if (is_valid && SUBMIT_BUTTON.hasAttribute('disabled'))
-      {
-        SUBMIT_BUTTON.removeAttribute('disabled');
-      } else
-      {
-        SUBMIT_BUTTON.setAttribute('disabled', '');
-      }
+      return is_valid;
     };
   }
 )();
