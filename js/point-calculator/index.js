@@ -12,7 +12,10 @@ const GET_GROUPED_PREDICTED_TRADES = function (predicted_trades)
       const KEY = current_predicted_trade.user;
       const CURRENT_GROUP = accumulator[KEY] ?? [];
 
-      return {...accumulator, [KEY]: [...CURRENT_GROUP, current_predicted_trade.player]};
+      return {
+        ...accumulator,
+        [KEY]: [...CURRENT_GROUP, {id: current_predicted_trade.id, player: current_predicted_trade.player}],
+      };
     }, INITIAL_GROUP_PREDICTED_TRADE_VALUE,
   );
 };
@@ -45,7 +48,7 @@ const GET_CALCULATED_POINTS_FOR_USER = function (user, predicted_trades, complet
       function (predicted_trade)
       {
         return {
-          player: predicted_trade,
+          player: predicted_trade.player,
           points: GET_CALCULATED_POINTS_FOR_PREDICTION(predicted_trade, completed_trades),
         };
       },
@@ -58,15 +61,43 @@ const GET_CALCULATED_POINTS_FOR_USER = function (user, predicted_trades, complet
   return results;
 };
 
+const RESULTS_SORT_ORDER = function (a, b)
+{
+  if (a.total_points < b.total_points)
+  {
+    return 1;
+  } else if (a.total_points > b.total_points)
+  {
+    return -1;
+  }
+
+  const a_user = a.user.toLowerCase();
+  const b_user = b.user.toLowerCase();
+
+  if (a_user > b_user)
+  {
+    return 1;
+  } else if (a_user < b_user)
+  {
+    return -1;
+  }
+
+  return 0;
+};
+
 export const GET_CALCULATED_POINTS = function (completed_trades, predicted_trades)
 {
   completed_trades = PROCESS_COMPLETED_TRADES(completed_trades, predicted_trades);
   const GROUPED_PREDICTED_TRADES = GET_GROUPED_PREDICTED_TRADES(predicted_trades);
 
-  return Object.entries(GROUPED_PREDICTED_TRADES).map(
+  let results = Object.entries(GROUPED_PREDICTED_TRADES).map(
     function ([user, predicted_trades])
     {
       return GET_CALCULATED_POINTS_FOR_USER(user, predicted_trades, completed_trades);
     },
   );
+
+  results.sort(RESULTS_SORT_ORDER);
+
+  return results;
 };
