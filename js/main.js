@@ -1,4 +1,5 @@
 import {DISPLAY_RESULTS} from './display-results';
+import {DOWNLOAD, GET_CSV} from './export-results';
 import {COMPLETED_TRADE_COLUMNS, GET_PARSED_CSV, PREDICTED_TRADE_COLUMNS} from './parse-data';
 import {GET_CALCULATED_POINTS} from './point-calculator';
 
@@ -55,6 +56,10 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
           // send the results as the first argument when the export_results function is called
           export_results = export_results.bind(null, RESULTS);
           DISPLAY_RESULTS(RESULTS);
+
+          // enable exporting
+          const EXPORT_BUTTON = document.querySelector(EXPORT_BUTTON_SELECTOR);
+          EXPORT_BUTTON.removeAttribute('disabled');
         });
     };
 
@@ -70,6 +75,7 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
     {
       const IS_VALID = IS_EVERY_INPUT_VALID(this.querySelectorAll('input').values());
       const SUBMIT_BUTTON = this.querySelector(SUBMIT_BUTTON_SELECTOR);
+      const EXPORT_BUTTON = document.querySelector(EXPORT_BUTTON_SELECTOR);
 
       if (IS_VALID && SUBMIT_BUTTON.hasAttribute('disabled'))
       {
@@ -77,6 +83,7 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
       } else
       {
         SUBMIT_BUTTON.setAttribute('disabled', '');
+        EXPORT_BUTTON.setAttribute('disabled', '');
       }
     };
 
@@ -104,7 +111,8 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
 
     let export_results = function (results)
     {
-      console.log(results);
+      const CSV = GET_CSV(results);
+      DOWNLOAD('results.csv', CSV);
     };
   }
 )();
