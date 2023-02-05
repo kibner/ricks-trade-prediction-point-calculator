@@ -1,5 +1,5 @@
 import {DISPLAY_RESULTS} from './display-results';
-import {GET_PARSED_CSV} from './parse-data';
+import {COMPLETED_TRADE_COLUMNS, GET_PARSED_CSV, PREDICTED_TRADE_COLUMNS} from './parse-data';
 import {GET_CALCULATED_POINTS} from './point-calculator';
 
 (
@@ -43,8 +43,8 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
       event.preventDefault();
 
       Promise.all([
-                    GET_PARSED_DATA_FOR_FILE_INPUT(INPUT__COMPLETED_TRADES_SELECTOR),
-                    GET_PARSED_DATA_FOR_FILE_INPUT(INPUT__PREDICTED_TRADES_SELECTOR),
+                    GET_PARSED_DATA_FOR_FILE_INPUT(INPUT__COMPLETED_TRADES_SELECTOR, COMPLETED_TRADE_COLUMNS),
+                    GET_PARSED_DATA_FOR_FILE_INPUT(INPUT__PREDICTED_TRADES_SELECTOR, PREDICTED_TRADE_COLUMNS),
                   ]).then(
         function (values)
         {
@@ -58,12 +58,12 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
         });
     };
 
-    const GET_PARSED_DATA_FOR_FILE_INPUT = async function (file_input_selector)
+    const GET_PARSED_DATA_FOR_FILE_INPUT = async function (file_input_selector, columns)
     {
       const FILE = document.querySelector(file_input_selector).files[0];
       const FILE_TEXT = await FILE.text();
 
-      return GET_PARSED_CSV(FILE_TEXT);
+      return GET_PARSED_CSV(FILE_TEXT, columns);
     };
 
     const ON_INPUT = function (event)
