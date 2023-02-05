@@ -1,10 +1,9 @@
-let PLAYER_POINTS_CELL_TEMPLATE;
-
 export const DISPLAY_RESULTS = function (results)
 {
-  const TBODY = document.querySelector(`output[name='calculator-result'] tbody`);
+  const TBODY = document.querySelector(`#calculator-result tbody`);
   const ROW_TEMPLATE = document.querySelector(`#calculated-points-row`);
-  PLAYER_POINTS_CELL_TEMPLATE = document.querySelector('#player-points-cell');
+  const PLAYER_POINTS_CELL_TEMPLATE = document.querySelector('#player-points-cell');
+  get_templated_player_points_cell = get_templated_player_points_cell.bind(null, PLAYER_POINTS_CELL_TEMPLATE);
 
   TBODY.textContent = null;
 
@@ -40,10 +39,7 @@ const SET_TEMPLATED_ROW_TD_VALUES = function (tds, player_points_cell_template, 
       {
         if (prediction_result.points > 0)
         {
-          const TEMPLATED_PLAYER_POINTS_CELL = GET_TEMPLATED_PLAYER_POINTS_CELL(
-            player_points_cell_template,
-            prediction_result,
-          );
+          const TEMPLATED_PLAYER_POINTS_CELL = get_templated_player_points_cell(prediction_result);
 
           tds[TD_INDEX].append(TEMPLATED_PLAYER_POINTS_CELL);
         } else
@@ -54,7 +50,7 @@ const SET_TEMPLATED_ROW_TD_VALUES = function (tds, player_points_cell_template, 
     });
 };
 
-const GET_TEMPLATED_PLAYER_POINTS_CELL = function (player_points_cell_template, prediction_result)
+let get_templated_player_points_cell = function (player_points_cell_template, prediction_result)
 {
   const TEMPLATED_PLAYER_POINTS_CELL = player_points_cell_template.content.cloneNode(true);
   const PLAYER_ELEMENT = TEMPLATED_PLAYER_POINTS_CELL.querySelectorAll(`.player-name`);

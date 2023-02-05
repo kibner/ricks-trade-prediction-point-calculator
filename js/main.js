@@ -1,4 +1,5 @@
 import {DISPLAY_RESULTS} from './display-results';
+import {DOWNLOAD, GET_CSV} from './export-results';
 import {COMPLETED_TRADE_COLUMNS, GET_PARSED_CSV, PREDICTED_TRADE_COLUMNS} from './parse-data';
 import {GET_CALCULATED_POINTS} from './point-calculator';
 
@@ -7,8 +8,9 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
   {
     const FORM_SELECTOR = 'form';
     const SUBMIT_BUTTON_SELECTOR = 'button[type="submit"]';
-    const INPUT__COMPLETED_TRADES_SELECTOR = 'completed-trades-file';
-    const INPUT__PREDICTED_TRADES_SELECTOR = 'predicted-trades-file';
+    const INPUT__COMPLETED_TRADES_SELECTOR = '#completed-trades-file';
+    const INPUT__PREDICTED_TRADES_SELECTOR = '#predicted-trades-file';
+    const EXPORT_BUTTON_SELECTOR = '#export-calculator-result';
 
     // readystatechange as event listener to insert or modify the DOM before DOMContentLoaded
     document.addEventListener(
@@ -32,6 +34,9 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
       const FORM = document.querySelector(FORM_SELECTOR);
       FORM.addEventListener('submit', ON_SUBMIT);
       FORM.addEventListener('input', ON_INPUT);
+
+      const EXPORT_BUTTON = document.querySelector(EXPORT_BUTTON_SELECTOR);
+      EXPORT_BUTTON.addEventListener('click', ON_EXPORT_BUTTON_CLICK);
     };
 
     const ON_SUBMIT = async function (event)
@@ -48,13 +53,19 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
           const PARSED_PREDICTED_TRADES = values[1];
           const RESULTS = GET_CALCULATED_POINTS(PARSED_COMPLETED_TRADES, PARSED_PREDICTED_TRADES);
 
+          // send the results as the first argument when the export_results function is called
+          export_results = export_results.bind(null, RESULTS);
           DISPLAY_RESULTS(RESULTS);
+
+          // enable exporting
+          const EXPORT_BUTTON = document.querySelector(EXPORT_BUTTON_SELECTOR);
+          EXPORT_BUTTON.removeAttribute('disabled');
         });
     };
 
     const GET_PARSED_DATA_FOR_FILE_INPUT = async function (file_input_selector, columns)
     {
-      const FILE = document.getElementById(file_input_selector).files[0];
+      const FILE = document.querySelector(file_input_selector).files[0];
       const FILE_TEXT = await FILE.text();
 
       return GET_PARSED_CSV(FILE_TEXT, columns);
@@ -64,6 +75,7 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
     {
       const IS_VALID = IS_EVERY_INPUT_VALID(this.querySelectorAll('input').values());
       const SUBMIT_BUTTON = this.querySelector(SUBMIT_BUTTON_SELECTOR);
+      const EXPORT_BUTTON = document.querySelector(EXPORT_BUTTON_SELECTOR);
 
       if (IS_VALID && SUBMIT_BUTTON.hasAttribute('disabled'))
       {
@@ -71,6 +83,7 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
       } else
       {
         SUBMIT_BUTTON.setAttribute('disabled', '');
+        EXPORT_BUTTON.setAttribute('disabled', '');
       }
     };
 
@@ -89,6 +102,17 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
       }
 
       return is_valid;
+    };
+
+    const ON_EXPORT_BUTTON_CLICK = function (event)
+    {
+      export_results();
+    };
+
+    let export_results = function (results)
+    {
+      const CSV = GET_CSV(results);
+      DOWNLOAD('trade_predictions_results.csv', CSV);
     };
   }
 )();
