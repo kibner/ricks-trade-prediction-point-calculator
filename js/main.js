@@ -112,7 +112,7 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
     let export_results = function (results)
     {
       const CSV = GET_CSV(results);
-      DOWNLOAD('results.csv', CSV);
+      DOWNLOAD('trade_predictions_results.csv', CSV);
     };
   }
 )();
