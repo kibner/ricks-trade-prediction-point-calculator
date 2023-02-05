@@ -52,8 +52,8 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
           const PARSED_PREDICTED_TRADES = values[1];
           const RESULTS = GET_CALCULATED_POINTS(PARSED_COMPLETED_TRADES, PARSED_PREDICTED_TRADES);
 
-          // send the results as the first argument when the EXPORT_RESULTS function is called
-          EXPORT_RESULTS.bind(null, RESULTS);
+          // send the results as the first argument when the export_results function is called
+          export_results = export_results.bind(null, RESULTS);
           DISPLAY_RESULTS(RESULTS);
         });
     };
@@ -99,10 +99,10 @@ import {GET_CALCULATED_POINTS} from './point-calculator';
 
     const ON_EXPORT_BUTTON_CLICK = function (event)
     {
-      EXPORT_RESULTS();
+      export_results();
     };
 
-    const EXPORT_RESULTS = function (results)
+    let export_results = function (results)
     {
       console.log(results);
     };
