@@ -26,3 +26,13 @@
   outline: 2px solid;
   outline-offset: 2px;
 }
+
+.flex
+{
+  display: flex;
+}
+
+.flex-direction-row-reverse
+{
+  flex-direction: row-reverse;
+}
