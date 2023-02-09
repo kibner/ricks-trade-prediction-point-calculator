@@ -27,6 +27,18 @@
   outline-offset: 2px;
 }
 
+@supports (-moz-appearance:none)
+{
+  .hover-outline:focus,
+  .hover-outline:focus-visible,
+  .hover-outline:focus-within,
+  .hover-outline:hover
+  {
+    outline: 2px solid;
+    outline-offset: 2px;
+  }
+}
+
 .flex
 {
   display: flex;
