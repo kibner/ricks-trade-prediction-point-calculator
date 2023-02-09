@@ -7,14 +7,17 @@ const TRIM_DATA = function (data)
 {
   const KEYS = Object.keys(data);
 
-  KEYS.map(function(key){
-    if(typeof data[key] === 'string' || data[key] instanceof String){
-      data[key] = data[key].trim();
-    }
-  });
+  KEYS.map(
+    function (key)
+    {
+      if (typeof data[key] === 'string' || data[key] instanceof String)
+      {
+        data[key] = data[key].trim();
+      }
+    });
 
-  return data
-}
+  return data;
+};
 
 export const GET_PARSED_CSV = function (csv_string, columns)
 {
@@ -24,7 +27,9 @@ export const GET_PARSED_CSV = function (csv_string, columns)
     from_line: 2,
   });
 
-  return PARSED_CSV.map(function (data) {
-    return TRIM_DATA(data);
-  });
+  return PARSED_CSV.map(
+    function (data)
+    {
+      return TRIM_DATA(data);
+    });
 };
