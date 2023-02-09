@@ -18,10 +18,10 @@
   display: inline-block;
 }
 
-.hover-outline:focus,
-.hover-outline:focus-visible,
-.hover-outline:focus-within,
-.hover-outline:hover
+.hover-outline:focus:has(*:not([disabled])),
+.hover-outline:focus-visible:has(*:not([disabled])),
+.hover-outline:focus-within:has(*:not([disabled])),
+.hover-outline:hover:has(*:not([disabled]))
 {
   outline: 2px solid;
   outline-offset: 2px;
