@@ -42,23 +42,51 @@ const GET_TOTAL_POINTS_FOR_USER = function (user_results)
 
 const GET_CALCULATED_POINTS_FOR_USER = function (user, predicted_trades, completed_trades)
 {
+  let prediction_results = predicted_trades.map(
+    function (predicted_trade)
+    {
+      return {
+        player: predicted_trade.player,
+        points: GET_CALCULATED_POINTS_FOR_PREDICTION(predicted_trade, completed_trades),
+      };
+    },
+  );
+
+  prediction_results.sort(PREDICTION_RESULTS_SORT_ORDER);
+
   let results = {
     user: user,
-    prediction_results: predicted_trades.map(
-      function (predicted_trade)
-      {
-        return {
-          player: predicted_trade.player,
-          points: GET_CALCULATED_POINTS_FOR_PREDICTION(predicted_trade, completed_trades),
-        };
-      },
-    ),
+    prediction_results: prediction_results,
   };
 
   results.bonus_points = GET_CALCULATED_BONUS_POINTS(results);
   results.total_points = GET_TOTAL_POINTS_FOR_USER(results);
 
   return results;
+};
+
+const PREDICTION_RESULTS_SORT_ORDER = function (a, b)
+{
+  if (a.points < b.points)
+  {
+    return 1;
+  } else if (a.points > b.points)
+  {
+    return -1;
+  }
+
+  const a_player = a.player.toLowerCase();
+  const b_player = b.player.toLowerCase();
+
+  if (a_player > b_player)
+  {
+    return 1;
+  } else if (a_player < b_player)
+  {
+    return -1;
+  }
+
+  return 0;
 };
 
 const RESULTS_SORT_ORDER = function (a, b)
