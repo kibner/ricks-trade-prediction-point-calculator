@@ -70,6 +70,7 @@
         <tr>
           <th>User</th>
           <th class='text-align-right'>Points</th>
+          <th class='text-align-right'>Bonus</th>
           <th class='text-align-center' colspan='4'>Predictions</th>
         </tr>
         </thead>
@@ -83,6 +84,7 @@
   <tr>
     <td></td>
     <td class='text-align-right'></td>
+    <td class='text-align-right'></td>
     <td></td>
     <td></td>
     <td></td>
@@ -90,8 +92,13 @@
   </tr>
 </template>
 
-<template id='player-points-cell'>
+<template id='correct-prediction-player-points-cell'>
   <div><em class='player-name'></em></div>
+  <div class='player-points text-align-right'></div>
+</template>
+
+<template id='wrong-prediction-player-points-cell'>
+  <div><span class='player-name'></span></div>
   <div class='player-points text-align-right'></div>
 </template>
 
